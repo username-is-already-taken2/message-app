@@ -42,7 +42,7 @@ jobs:
         context: .
         platforms: linux/amd64
         build-args: TARGET_ARCH=amd64
-        push: false
+        push: true
         tags: ghcr.io/username-is-already-taken2/message-app:latest
 
     - name: Extract image details from build output
