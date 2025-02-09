@@ -1,0 +1,25 @@
+name: Download latest release
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  gh-cli:
+    name: release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: download
+      run: gh release download --repo ${PARENT_REPO} --pattern '*inux_*' --pattern 'checksums.txt'
+      env:
+        PARENT_REPO: ${{ secrets.PARENT_REPO }}
+
+    - name: verify
+      run: sha256sum -c ./checksums.txt --ignore-missing --strict
+
+    - name: extract
+      run: |
+        mkdir -p ./amd64 ./arm64
+        tar -zxvf ./*_x86_64.tar.gz -C ./amd64
+        tar -zxvf ./*_arm64.tar.gz -C ./arm64

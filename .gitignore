@@ -1,0 +1,5 @@
+# Download Releases
+*.gz
+checksums.txt
+arm64/
+amd64/
