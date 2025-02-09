@@ -50,9 +50,12 @@ jobs:
         IMAGE_DIGEST=$(echo "${{ steps.build.outputs.digest }}")
         echo "Extracted Image Digest: $IMAGE_DIGEST"
 
-        echo "${{ steps.build.outputs.metadata }}" > metadata.json
-        # Extract the image name from metadata JSON using jq
-        IMAGE_NAME=$(jq -r '.["image.name"]' metadata.json)
+        # Note to future self, echo strips the "'s?
+        METADATA=$(echo '${{ steps.build.outputs.metadata }}')
+
+        echo $METADATA
+
+        IMAGE_NAME=$( echo ${METADATA} | jq -r '.["image.name"]')
 
         # Output the extracted image name
         echo "Extracted Image Name: $IMAGE_NAME"
