@@ -7,9 +7,9 @@ This repo will package the release from the [go_message-app](https://github.com/
 - [x] Create Dockerfile
 - [x] Create GHA to build image (amd64)
 - [x] Create GHA to publish image
-- [ ] Create GHA to create k8s manifest
+- [x] Create GHA to create k8s manifest
 - [ ] Create policy as code def
-- [ ] Chain workflows
+- [x] Chain workflows
 - [ ] Create Trigger from parent repo
 
 ## Fluff:

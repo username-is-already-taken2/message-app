@@ -46,16 +46,34 @@ jobs:
         tags: ghcr.io/username-is-already-taken2/message-app:latest
 
     - name: Extract image details from build output
+      id: metadata
       run: |
         IMAGE_DIGEST=$(echo "${{ steps.build.outputs.digest }}")
         echo "Extracted Image Digest: $IMAGE_DIGEST"
 
-        # Note to future self, echo strips the "'s?
+        # Note to future self, echo strips the "'s if you pipe it, set var first
         METADATA=$(echo '${{ steps.build.outputs.metadata }}')
 
-        echo $METADATA
+        # echo $METADATA
 
         IMAGE_NAME=$( echo ${METADATA} | jq -r '.["image.name"]')
 
         # Output the extracted image name
         echo "Extracted Image Name: $IMAGE_NAME"
+
+        # Store values as outputs for later steps
+        echo "image_digest=$IMAGE_DIGEST" >> $GITHUB_OUTPUT
+        echo "image_name=$IMAGE_NAME" >> $GITHUB_OUTPUT
+
+    - uses: actions-hub/kubectl@master
+      with:
+        args: create deployment message-app --image=${{ steps.metadata.outputs.image_name }}@${{ steps.metadata.outputs.image_digest }} --port=8080 --dry-run=client -o yaml
+
+    - uses: actions-hub/kubectl@master
+      with:
+        args: create deployment message-app --image=${{ steps.metadata.outputs.image_name }}@${{ steps.metadata.outputs.image_digest }} --port=8080 --dry-run=client -o yaml > k8s-deployment.yml
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: Deployment manifest
+        path: k8s-deployment.yml
