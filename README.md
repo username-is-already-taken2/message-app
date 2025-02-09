@@ -10,7 +10,7 @@ This repo will package the release from the [go_message-app](https://github.com/
 - [x] Create GHA to create k8s manifest
 - [x] Create policy as code def
 - [x] Chain workflows
-- [ ] Create Trigger from parent repo
+- [x] Create Trigger from parent repo
 
 ## Fluff:
 - [ ] Create arm64 image

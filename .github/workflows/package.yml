@@ -2,7 +2,8 @@ name: Package and publish
 
 on:
   workflow_dispatch:
-
+  repository_dispatch:
+    types: [ trigger-gift-wrap ]
 
 jobs:
   docker:
