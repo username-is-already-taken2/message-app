@@ -42,4 +42,4 @@ jobs:
         platforms: linux/amd64
         build-args: TARGET_ARCH=amd64
         push: true
-        tags: username-is-already-taken2/message-app:latest
+        tags: ghcr.io/username-is-already-taken2/message-app:latest
