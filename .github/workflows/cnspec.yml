@@ -2,7 +2,8 @@ name: cnspec scan
 
 on:
   workflow_dispatch:
-
+  repository_dispatch:
+    types: [ trigger-scan ]
 
 jobs:
   cnspec:
