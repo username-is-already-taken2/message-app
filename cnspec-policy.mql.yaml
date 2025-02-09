@@ -1,0 +1,38 @@
+# Read more about the policy structure at https://mondoo.com/docs
+policies:
+- uid: message-app-deployment-policy
+  name: Message-App Package Checklist
+  version: 1.0.0
+  tags:
+    env: prod
+  authors:
+  - name: Gary Bright
+    email: digitalGaz@hotmail.com
+  docs:
+    desc: |-
+      ## Overview
+
+      This policy is used to help validate the docker configuration before building the images.
+
+  groups:
+  - filters:
+    - mql: asset.family.contains("unix")
+    checks:
+    - uid: dockerfile-exists-01
+    - uid: dockerfile-binary-02
+    - uid: dockerfile-expose-03
+
+queries:
+- uid: dockerfile-exists-01
+  title: Validate that dockerfile exists
+  mql: file('./Dockerfile').exists
+
+- uid: dockerfile-binary-02
+  title: Validate the binary has been copied to the correct place for the cmd
+  mql: |
+    file('./Dockerfile').content.contains(/COPY \$\{TARGET_ARCH\}\/message-app \/message-app/)
+    file('./Dockerfile').content.contains(/CMD \[ \"\/message-app\" \]/)
+
+- uid: dockerfile-expose-03
+  title: Validate that the dockerfile exposes a port
+  mql: file('./Dockerfile').content.contains(/EXPOSE \d+/)

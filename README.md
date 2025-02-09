@@ -8,7 +8,7 @@ This repo will package the release from the [go_message-app](https://github.com/
 - [x] Create GHA to build image (amd64)
 - [x] Create GHA to publish image
 - [x] Create GHA to create k8s manifest
-- [ ] Create policy as code def
+- [x] Create policy as code def
 - [x] Chain workflows
 - [ ] Create Trigger from parent repo
 
@@ -16,6 +16,8 @@ This repo will package the release from the [go_message-app](https://github.com/
 - [ ] Create arm64 image
 - [ ] Process tags from parent repo event
 - [ ] Extract Version from asset, add to tag
+- [ ] Add wiki
+- [ ] Publish cnspec scan results
 
 Lessions Learned:
 - Default repo permission
