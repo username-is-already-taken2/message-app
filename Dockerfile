@@ -7,5 +7,5 @@ COPY ${TARGET_ARCH}/message-app /message-app
 ENV PORT=8080 \
     GIN_MODE=release
 
-EXPOSE 8080
+EXXPOSE 8080
 CMD [ "/message-app" ]
