@@ -20,6 +20,10 @@ jobs:
 
     - uses: actions/checkout@v4
 
+    - uses: mondoohq/actions@v11.0.0
+      with:
+        args: scan local --incognito --policy-bundle ./cnspec-policy.mql.yaml
+
     - name: Download release
       run: gh release download --repo ${PARENT_REPO} --pattern '*inux_*' --pattern 'checksums.txt'
       env:
