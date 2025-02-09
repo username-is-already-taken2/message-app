@@ -17,3 +17,6 @@ This repo will package the release from the [go_message-app](https://github.com/
 - [ ] Process tags from parent repo event
 - [ ] Extract Version from asset, add to tag
 
+Lessions Learned:
+- Default repo permission
+    It's only for reading registry not for pushing tokens, need to see how to grant permissions if not happy changing default.

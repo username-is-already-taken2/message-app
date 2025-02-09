@@ -36,10 +36,22 @@ jobs:
         tar -zxvf ./*_arm64.tar.gz -C ./arm64
 
     - name: Build and push (amd64)
+      id: build
       uses: docker/build-push-action@v6
       with:
         context: .
         platforms: linux/amd64
         build-args: TARGET_ARCH=amd64
-        push: true
+        push: false
         tags: ghcr.io/username-is-already-taken2/message-app:latest
+
+    - name: Extract image details from build output
+      run: |
+        IMAGE_DIGEST=${{ steps.build.outputs.digest }}
+        echo "Extracted Image Digest: $IMAGE_DIGEST"
+
+        # Extract the image name from metadata JSON using jq
+        IMAGE_NAME=$(echo "${{ steps.build.outputs.metadata }}" | jq -r '.["image.name"]')
+
+        # Output the extracted image name
+        echo "Extracted Image Name: $IMAGE_NAME"
