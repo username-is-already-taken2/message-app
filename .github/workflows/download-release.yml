@@ -14,6 +14,7 @@ jobs:
       run: gh release download --repo ${PARENT_REPO} --pattern '*inux_*' --pattern 'checksums.txt'
       env:
         PARENT_REPO: ${{ secrets.PARENT_REPO }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: verify
       run: sha256sum -c ./checksums.txt --ignore-missing --strict
