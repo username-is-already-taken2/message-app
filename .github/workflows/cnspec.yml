@@ -10,6 +10,14 @@ jobs:
     name: scan
     runs-on: ubuntu-latest
     steps:
+    - name: Debugging - Setting Git Tag
+      run: |
+        echo "Git tag received: ${{ github.event.client_payload.version }}"
+        echo "GIT_TAG=${{ github.event.client_payload.version }}" >> $GITHUB_ENV
+
+    - name: Debug - Print TAG
+      run: |
+        echo ${GIT_TAG}
 
     - uses: actions/checkout@v4
 
