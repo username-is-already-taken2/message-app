@@ -14,8 +14,8 @@ This repo will package the release from the [go_message-app](https://github.com/
 
 ## Fluff:
 - [ ] Create arm64 image
-- [ ] Process tags from parent repo event
-- [ ] Extract Version from asset, add to tag
+- [x] Process tags from parent repo event
+- [x] Use tag from parent repo as image tag
 - [ ] Add wiki
 - [ ] Publish cnspec scan results
 
